@@ -1,5 +1,6 @@
 package com.tom.learnkoltin.presentation.main
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,7 @@ class MainAdapter (private val listPost:MutableList<Post>) : RecyclerView.Adapte
         return listPost.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(mProducts: List<Post>){
         listPost.clear()
         listPost.addAll(mProducts)

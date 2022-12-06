@@ -1,4 +1,4 @@
-package com.tom.learnkoltin.data.remote.dto
+package com.tom.learnkoltin.data.remote.main.dto
 import com.google.gson.annotations.SerializedName
 import com.tom.learnkoltin.domain.model.Post
 

@@ -1,11 +1,12 @@
-package com.tom.learnkoltin.data.remote
+package com.tom.learnkoltin.common
 
-import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import okhttp3.Interceptor
 import okhttp3.Response
+import javax.inject.Inject
 
-class ErrorResponseInterceptor : Interceptor {
+
+class ErrorResponseInterceptor @Inject constructor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val response = chain.proceed(chain.request())
         if (response.isSuccessful.not()) {

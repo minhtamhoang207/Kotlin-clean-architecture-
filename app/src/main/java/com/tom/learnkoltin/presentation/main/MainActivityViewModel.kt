@@ -1,8 +1,8 @@
 package com.tom.learnkoltin.presentation.main
 
-import com.tom.learnkoltin.common.Result
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tom.learnkoltin.common.BaseResult
 import com.tom.learnkoltin.domain.model.Post
 import com.tom.learnkoltin.domain.usecase.GetPostsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,11 +35,11 @@ class MainActivityViewModel @Inject constructor(
                 .collect { baseResult ->
                     hideLoading()
                     when(baseResult){
-                        is Result.Success -> {
+                        is BaseResult.Success -> {
                             listPost.value = baseResult.data
                         }
-                        is Result.Error -> {
-                            showToast(baseResult.exception.message.toString())
+                        is BaseResult.Error -> {
+                            showToast(message = baseResult.exception.message.orEmpty())
                         }
                     }
                 }
@@ -57,18 +57,4 @@ class MainActivityViewModel @Inject constructor(
     private fun showToast(message: String){
         viewModelState.value = MainState.ShowToast(message)
     }
-
-
-//    private suspend fun getPost(){
-//        getPostsUseCase().onEach { result ->
-//            when (result) {
-//                is Result.Success -> {
-//                    viewModelState.update {it.copy(listPost = result.data)}
-//                }
-//                is Result.Error -> {
-//                    viewModelState.update {it.copy(error = result.toString())}
-//                }
-//            }
-//        }.launchIn(viewModelScope)
-//    }
 }

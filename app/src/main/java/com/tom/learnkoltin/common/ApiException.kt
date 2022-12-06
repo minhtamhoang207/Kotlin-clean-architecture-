@@ -1,4 +1,4 @@
-package com.tom.learnkoltin.data.remote
+package com.tom.learnkoltin.common
 
 import java.io.IOException
 

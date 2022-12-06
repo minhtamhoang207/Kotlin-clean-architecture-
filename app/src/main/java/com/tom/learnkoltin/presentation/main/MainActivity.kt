@@ -2,14 +2,12 @@ package com.tom.learnkoltin.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tom.learnkoltin.databinding.ActivityMainBinding
 import com.tom.learnkoltin.domain.model.Post
@@ -30,8 +28,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupRecyclerView()
         observe()
-        viewModel.getPost()
+        init()
 
+    }
+
+    private fun init(){
+        viewModel.getPost()
     }
 
     private fun setupRecyclerView(){
