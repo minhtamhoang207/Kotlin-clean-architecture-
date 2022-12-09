@@ -27,9 +27,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupRecyclerView()
-        observe()
+        observeViewModel()
         init()
 
+        binding.fab.setOnClickListener{
+            init()
+        }
     }
 
     private fun init(){
@@ -37,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView(){
-        val mAdapter = MainAdapter(mutableListOf())
+        val mAdapter = MainAdapter(mutableListOf(), this)
 
         binding.mainList.apply {
             adapter = mAdapter
@@ -45,22 +48,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun observe(){
-        observeState()
-        observeProducts()
-    }
-
-
-    private fun observeState(){
+    private fun observeViewModel() {
         viewModel.mainState
             .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
             .onEach { state ->
                 handleState(state)
             }
             .launchIn(lifecycle.coroutineScope)
-    }
 
-    private fun observeProducts(){
         viewModel.mListPost
             .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
             .onEach { result ->
@@ -68,7 +63,6 @@ class MainActivity : AppCompatActivity() {
             }
             .launchIn(lifecycle.coroutineScope)
     }
-
 
     private fun handleState(state: MainState){
         when(state){
@@ -81,13 +75,16 @@ class MainActivity : AppCompatActivity() {
     private fun handleLoading(isLoading: Boolean){
         if(isLoading){
             binding.loadingProgressBar.visibility = View.VISIBLE
-        }else{
+            binding.mainList.visibility = View.GONE
+        } else{
             binding.loadingProgressBar.visibility = View.GONE
+            binding.mainList.visibility = View.VISIBLE
+
         }
     }
 
     private fun handleProducts(listPost: List<Post>){
-        binding.mainList.adapter?.let {
+        binding.mainList.adapter?.let { it ->
             if(it is MainAdapter){
                 it.updateList(listPost)
             }

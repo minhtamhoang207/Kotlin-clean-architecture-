@@ -5,5 +5,5 @@ import com.tom.learnkoltin.domain.model.Post
 import kotlinx.coroutines.flow.Flow
 
 interface IMainRepository {
-    suspend fun getPosts(): Flow<BaseResult<List<Post>>>
+    suspend fun getPosts(): BaseResult<List<Post>>
 }
