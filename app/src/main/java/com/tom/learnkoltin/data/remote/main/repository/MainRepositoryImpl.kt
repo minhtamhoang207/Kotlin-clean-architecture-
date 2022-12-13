@@ -7,21 +7,19 @@ import com.tom.learnkoltin.data.remote.main.api.MainApi
 import com.tom.learnkoltin.data.remote.main.dto.PostDTO
 import com.tom.learnkoltin.data.remote.main.dto.toPost
 import com.tom.learnkoltin.domain.repository.IMainRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
 import retrofit2.Response
 import javax.inject.Inject
 
 class MainRepositoryImpl @Inject constructor(
-    private val mainApiService: MainApi
+    private val mainApiService: MainApi,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ): IMainRepository {
 
     override suspend fun getPosts(): BaseResult<List<Post>> =
-        withContext(Dispatchers.IO) {
+        withContext(dispatcher) {
             val response : Response<List<PostDTO>> =  mainApiService.getPosts()
             if (response.isSuccessful) {
                 val body = response.body()?.map { it.toPost() }

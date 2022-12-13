@@ -8,8 +8,8 @@ import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class GetPostsUseCase @Inject constructor(private val repository: MainRepositoryImpl){
-    suspend fun invoke(): BaseResult<List<Post>>{
-        delay(3000L)
+    suspend operator fun invoke(): BaseResult<List<Post>>{
+        delay(2_000)
         return repository.getPosts()
     }
 }

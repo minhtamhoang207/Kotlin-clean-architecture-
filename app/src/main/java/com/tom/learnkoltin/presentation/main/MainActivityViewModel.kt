@@ -1,5 +1,6 @@
 package com.tom.learnkoltin.presentation.main
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tom.learnkoltin.common.BaseResult
@@ -25,9 +26,8 @@ class MainActivityViewModel @Inject constructor(
     fun getPost(){
         setLoading()
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
-            val response = getPostsUseCase.invoke()
-            withContext(Dispatchers.Main) {
-                when(response){
+            try {
+                when(val response = getPostsUseCase.invoke()){
                     is BaseResult.Success -> {
                         listPost.value = response.data
                         hideLoading()
@@ -36,12 +36,15 @@ class MainActivityViewModel @Inject constructor(
                         onError(message = response.exception.message.orEmpty())
                     }
                 }
+            } catch (e: Exception){
+                onError(message = e.message.orEmpty())
             }
         }
     }
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        onError(throwable.localizedMessage as String)
+        println(throwable.localizedMessage.orEmpty())
+//        onError(throwable.localizedMessage as String)
     }
 
     private fun onError(message: String) {
