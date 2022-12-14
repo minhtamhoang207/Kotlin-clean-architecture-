@@ -42,6 +42,10 @@ class MainActivityViewModel @Inject constructor(
         }
     }
 
+    fun deleteElement(postID: Int){
+        listPost.value = listPost.value.filter { it.id != postID}
+    }
+
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         println(throwable.localizedMessage.orEmpty())
 //        onError(throwable.localizedMessage as String)

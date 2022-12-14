@@ -16,6 +16,7 @@ import com.tom.learnkoltin.presentation.main.MainActivityViewModel
 import com.tom.learnkoltin.presentation.main.MainAdapter
 import com.tom.learnkoltin.presentation.main.MainState
 import kotlinx.coroutines.flow.collectLatest
+import java.text.FieldPosition
 
 class fragment_list : Fragment(){
 
@@ -31,7 +32,10 @@ class fragment_list : Fragment(){
         binding = FragmentListBinding.inflate(inflater, container, false)
 
         val mAdapter = MainAdapter(
-            ::MainAdapter.OnClickListener
+            MainAdapter.OnClickListener(
+                {adapterOnClick(it )},
+                {adapterOnLongPress(it )}
+            )
         )
 
 //        adapter = MemesAdapter(MemesAdapter.OnClickListener { photo ->
@@ -77,8 +81,7 @@ class fragment_list : Fragment(){
     }
 
     private fun adapterOnLongPress(post: Post) {
-        println(post.toString())
-//        findNavController().navigate(R.id.detailFragment2)
+        viewModel.deleteElement(post.id)
     }
 
     private fun observeViewModel(mAdapter: MainAdapter) {

@@ -47,7 +47,7 @@ class MainAdapter (
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_baseline_refresh_24)
                 .into(binding.imgView);
-            if(position % 2 == 0){
+            if(layoutPosition % 2 == 0){
                 binding.cardItem.setBackgroundResource(R.color.purple_200)
             }
 //            itemBinding.root.setOnClickListener {

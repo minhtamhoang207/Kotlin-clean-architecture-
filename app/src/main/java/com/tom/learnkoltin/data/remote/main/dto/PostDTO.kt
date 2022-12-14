@@ -5,7 +5,7 @@ import com.tom.learnkoltin.domain.model.Post
 data class PostDTO(
     @SerializedName("userId")
     val userID: Long,
-    val id: Long,
+    val id: Int,
     val title: String,
     val body: String
 )
