@@ -1,35 +1,34 @@
-package com.tom.learnkoltin
+package com.tom.learnkoltin.presentation.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridLayout
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tom.learnkoltin.databinding.FragmentListBinding
+import com.tom.learnkoltin.databinding.FragmentHomeBinding
 import com.tom.learnkoltin.domain.model.Post
-import com.tom.learnkoltin.presentation.main.MainActivityViewModel
 import com.tom.learnkoltin.presentation.main.MainAdapter
 import com.tom.learnkoltin.presentation.main.MainState
 import kotlinx.coroutines.flow.collectLatest
-import java.text.FieldPosition
 
-class fragment_list : Fragment(){
+class HomeFragment : Fragment() {
 
-    private lateinit var binding: FragmentListBinding
-    private val viewModel: MainActivityViewModel by activityViewModels()
+    private lateinit var binding: FragmentHomeBinding
+    private val viewModel: HomeViewModel by activityViewModels()
     private var refresh : Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        binding = FragmentListBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         val mAdapter = MainAdapter(
             MainAdapter.OnClickListener(
@@ -51,10 +50,6 @@ class fragment_list : Fragment(){
         setupRecyclerView(mAdapter)
         observeViewModel(mAdapter)
 
-        binding.fab.setOnClickListener{
-            init()
-        }
-
         return binding.root
 
     }
@@ -65,9 +60,9 @@ class fragment_list : Fragment(){
     }
 
     private fun setupRecyclerView(mAdapter: MainAdapter){
-        binding.mainList.apply {
+        binding.homeList.apply {
             adapter = mAdapter
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = GridLayoutManager(context, 2)
         }
     }
 
@@ -104,11 +99,11 @@ class fragment_list : Fragment(){
 
     private fun handleLoading(isLoading: Boolean){
         if(isLoading){
-            binding.loadingProgressBar.visibility = View.VISIBLE
-            binding.mainList.visibility = View.GONE
+            binding.homeListProgressbar.visibility = View.VISIBLE
+            binding.homeList.visibility = View.GONE
         } else{
-            binding.loadingProgressBar.visibility = View.GONE
-            binding.mainList.visibility = View.VISIBLE
+            binding.homeListProgressbar.visibility = View.GONE
+            binding.homeList.visibility = View.VISIBLE
 
         }
     }

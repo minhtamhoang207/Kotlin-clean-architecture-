@@ -3,25 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/fragment_list">
+    app:startDestination="@id/homeFragment">
     <fragment
-        android:id="@+id/detailFragment2"
-        android:name="com.tom.learnkoltin.DetailFragment"
-        android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" >
-        <action
-            android:id="@+id/action_detailFragment2_to_fragment_list"
-            app:destination="@id/fragment_list" />
-    </fragment>
+        android:id="@+id/homeFragment"
+        android:name="com.tom.learnkoltin.presentation.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/fragment_list"
-        android:name="com.tom.learnkoltin.fragment_list"
-        android:label="fragment_list"
-        tools:layout="@layout/fragment_list" >
-        <action
-            android:id="@+id/action_fragment_list_to_detailFragment2"
-            app:destination="@id/detailFragment2" />
-    </fragment>
+        android:id="@+id/favoriteFragment"
+        android:name="com.tom.learnkoltin.presentation.favorite.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.tom.learnkoltin.presentation.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
 
 <!--<action-->
