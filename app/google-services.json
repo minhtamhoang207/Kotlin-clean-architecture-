@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "132172018088",
+    "project_id": "test-twilio-8fdf4",
+    "storage_bucket": "test-twilio-8fdf4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132172018088:android:2019ba54317179b0716d9d",
+        "android_client_info": {
+          "package_name": "com.tom.learnkoltin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "132172018088-k89ocerlkts1cg136meb449tfeqsc63c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvpimeg7HQ2Kpjmrq5oiyE_wr5cTzEKWE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "132172018088-k89ocerlkts1cg136meb449tfeqsc63c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
